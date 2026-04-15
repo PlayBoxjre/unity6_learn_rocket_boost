@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,6 +33,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        Physics.gravity = new Vector3(0, -4f, 0);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -49,7 +49,10 @@ public class Movement : MonoBehaviour
         float routationInput = rotaion.ReadValue<float>();
         if(routationInput != 0f)
         {
+            rb.freezeRotation = true;
             transform.Rotate(Vector3.forward * -routationInput * Time.fixedDeltaTime * rotationStrength);
+            rb.freezeRotation = false;
+
         }
     }
 
@@ -59,7 +62,6 @@ public class Movement : MonoBehaviour
         if (thrust.IsPressed())
         {
             rb.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
-
         }
     }
 }
