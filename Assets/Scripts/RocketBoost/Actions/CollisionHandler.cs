@@ -11,20 +11,20 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("This thing is friendly");
                 break;
             case "Finish":
-                ReloadScene( (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings );
+                Invoke("LoadNextScene", 3f);
                 break;
-            case "Fuel":
-                Debug.Log("You picked up fuel!");
-                break; 
             default:
-                ReloadScene(SceneManager.GetActiveScene().buildIndex);
+                Invoke("ReloadScene", 3f);
                 break;
-        }
-
-
-        void ReloadScene(int sceneIndex)
-        {
-            SceneManager.LoadScene(sceneIndex);
         }
     }
+    void LoadNextScene()
+    {
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
+    }
+    void ReloadScene( )
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+   
 }
