@@ -12,6 +12,8 @@ public class CollisionHandler : MonoBehaviour
 
     Movement movementScript;
     AudioSource audioSource;
+    // 用于处理多次碰撞问题，碰撞后，isControllable设置为false，禁止再次碰撞
+    bool isControllable = true;
 
     private void Start()
     {
@@ -21,6 +23,9 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // isControllable 
+        if (!isControllable) return;
+
         switch(collision.gameObject.tag)
         {
             case "friendly":
@@ -37,9 +42,10 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartSuccessSequence()
     {
+        isControllable = false;
+
         // todo add sfx and particle effect
         // 1. play sfx 
-
         audioSource.PlayOneShot(landAudio, 1.0f);
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextScene", loadlLevelDelay);
@@ -48,6 +54,7 @@ public class CollisionHandler : MonoBehaviour
     // 为了避免使用“reloadScene"硬编码风格提取的方法
     private void StartCrashSequence()
     {
+        isControllable = false;
         // todo add sfx and particle effect
 
 
