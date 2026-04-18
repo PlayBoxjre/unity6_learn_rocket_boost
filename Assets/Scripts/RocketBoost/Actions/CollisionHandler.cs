@@ -9,7 +9,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip landAudio;
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem crashParticles;
-
+    [SerializeField] float volumnScale = 0.3f;
     AudioSource audioSource;
     // 用于处理多次碰撞问题，碰撞后，isControllable设置为false，禁止再次碰撞
     bool isControllable = true;
@@ -64,7 +64,7 @@ public class CollisionHandler : MonoBehaviour
         // todo add sfx and particle effect
         // 1. play sfx 
         audioSource.Stop();
-        audioSource.PlayOneShot(landAudio, 1.0f);
+        audioSource.PlayOneShot(landAudio, volumnScale);
         successParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextScene", loadlLevelDelay);
@@ -77,7 +77,7 @@ public class CollisionHandler : MonoBehaviour
         // todo add sfx and particle effect
 
         audioSource.Stop();
-        audioSource.PlayOneShot(explosionAudio,1.0f);
+        audioSource.PlayOneShot(explosionAudio, volumnScale);
         crashParticles.Play();
         // 移动和当前脚本再Player身上，可以直接获取Movement脚本，并停用，防止碰撞后，还可以操作问题
         GetComponent<Movement>().enabled = false;
