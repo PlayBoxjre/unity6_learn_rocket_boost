@@ -136,8 +136,8 @@ MonoBehaviour:
       m_Action: Rotaion
       m_Flags: 8
     m_Flags: 0
-  thrustStrength: 800
-  rotationStrength: 100
+  thrustStrength: 1500
+  rotationStrength: 200
   volumnScale: 1
   mainEngine: {fileID: 8300000, guid: 180dbde625a7d984c855f6dfca09f0f4, type: 3}
   mainTrustParticle: {fileID: 1438657837204203819}

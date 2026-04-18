@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem mainTrustParticle;
     [SerializeField] ParticleSystem rightTrustParticle;
     [SerializeField] ParticleSystem leftTrustParticle;
+    
 
 
 
@@ -40,7 +41,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
-        Physics.gravity = new Vector3(0, -4f, 0);
+        //Physics.gravity = new Vector3(0, -4f, 0);
         rb = GetComponent<Rigidbody>();
         trustAudioSource = GetComponent<AudioSource>();
     }
