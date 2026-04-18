@@ -1,7 +1,5 @@
-using NUnit.Framework;
-using System;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
@@ -16,15 +14,34 @@ public class CollisionHandler : MonoBehaviour
     // 用于处理多次碰撞问题，碰撞后，isControllable设置为false，禁止再次碰撞
     bool isControllable = true;
 
+    bool isCollidable = true;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        RespondToDebugKey();
+    }
+
+    private  void RespondToDebugKey()
+    {
+        if (Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            LoadNextScene();
+        }
+        else if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            isCollidable = !isCollidable; // toggle collidable
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         // isControllable 
-        if (!isControllable) return;
+        if (!isControllable || !isCollidable) return;
 
         switch(collision.gameObject.tag)
         {
